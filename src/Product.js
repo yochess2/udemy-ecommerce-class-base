@@ -12,8 +12,18 @@ export default class Product extends React.Component {
 					
 
 					<div className="card-body">
-						<div className="text-muted"># {this.state.product.id}</div>
+						<div className="text-muted">
+							# {this.state.product.id}
 
+							<span 
+								className="pull-right hand-icon"
+								onClick={() => {
+									this.props.onDelete(this.state.product)
+								}}
+							>
+								<i className="fa fa-times"></i>
+							</span>
+						</div>
 						<h5 className="pt-2 border-top">
 							{this.state.product.productName}
 						</h5>
