@@ -21,6 +21,7 @@ export default class ShoppingCart extends React.Component {
 				productName: "Samsung QLED TV",
 				price: 7745,
 				quantity: 0,
+				test: [0,1],
 			},
 			{ 
 				id: 4,
@@ -51,7 +52,12 @@ export default class ShoppingCart extends React.Component {
 				<div className="row">
 					{this.state.products.map((prod) => {
 						return (
-							<Product key={prod.id} product={prod}>
+							<Product 
+								key={prod.id} 
+								product={prod}
+								onIncrement={this.handleIncrement}
+								onDecrement={this.handleDecrement}
+							>
 								<button className="btn btn-primary">Buy Now</button>
 							</Product>
 						)
@@ -60,4 +66,25 @@ export default class ShoppingCart extends React.Component {
 			</div>
 		)
 	}
+
+	handleIncrement = (product, maxValue) => {
+		// console.log('prod', product)
+		let allProducts = [...this.state.products];
+		let index = allProducts.indexOf(product);
+
+		if (allProducts[index].quantity < maxValue) {
+			allProducts[index].quantity++;
+			this.setState( {products: allProducts} );
+		}
+	};
+
+	handleDecrement = (product, minValue) => {
+		let allProducts = [...this.state.products];
+		let index = allProducts.indexOf(product);
+
+		if (allProducts[index].quantity > minValue) {
+			allProducts[index].quantity--;
+			this.setState( {products: allProducts} );
+		}
+	};
 }
