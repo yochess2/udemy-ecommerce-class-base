@@ -51,12 +51,9 @@ export default class ShoppingCart extends React.Component {
 				<div className="row">
 					{this.state.products.map((prod) => {
 						return (
-							<Product 
-								key={prod.id} 
-								id={prod.id} 
-								productName={prod.productName} 
-								price={prod.price}
-							/>
+							<Product key={prod.id} product={prod}>
+								<button className="btn btn-primary">Buy Now</button>
+							</Product>
 						)
 					})}
 				</div>
