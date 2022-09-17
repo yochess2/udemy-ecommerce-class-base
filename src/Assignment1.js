@@ -1,18 +1,13 @@
 import React, { Component } from "react";
 
 class Assignment1 extends Component {
-	//Question 1: JS doesn't have private methods right? 
-	//  So I assume best practice is to denote private methods with an underscore.
-	//Question 2: How do hoisting work in classes? 
-	//  I think I would need to declare and define this method before it is called.
-	//  I would receive an error if this method is declared before being invoked on line 26.
-
+	//helper method not pertaining to the scope of this class...
 	//input: int a, int b
 	//returns the product of num1 and num2
 	_multiply = (a,b) => a*b;
 
 
-	//Question 3: How do I grab the price of price and quantity dynamically within each object's netPrice?
+	//Question: How do I grab the price of price and quantity dynamically within each object's netPrice?
 	//  I had to hardcode the netPrice for each object.
 	state = {
 		pageTitle: "Assignment 1",
@@ -54,6 +49,7 @@ class Assignment1 extends Component {
 		this.setState([...products])
 	}
 
+	//TODO: refactor + styling
 	render() {
 		return <>
 			<h4>Buy Products</h4>
