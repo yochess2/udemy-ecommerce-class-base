@@ -1,11 +1,38 @@
 import React, { Component } from 'react'
 
 export default class Product extends React.Component {
-	state = { 
-		product: this.props.product
-	};
+	constructor(props) {
+		super(props)
+		// console.log('   a. constructor of product')
+		this.state = { 
+			product: this.props.product
+		};
+	}
+
+	componentDidMount() {
+		// console.log('A. component did mount of product')
+		//put http events here, after all is rendered
+
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		console.log(
+			// 'B. compoennt did update of product', 
+			// prevState, 
+			// this.state
+		)
+	}
+
+	componentWillUnmount() {
+		// console.log('C. component did unmount for product');
+	}
+
+	componentDidCatch(error, info) {
+		console.log('D. error for product, ', error, info)
+	}
 
 	render() {
+		// console.log('   b. render of product')
 		return (
 			<div className="col-lg-6">
 				<div className="card m-2">

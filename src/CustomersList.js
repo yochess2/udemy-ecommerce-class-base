@@ -1,48 +1,52 @@
 import React, { Component } from "react";
 
 class CustomersList extends Component {
+	//Executes when the component is mounted
+	constructor() {
+		//Initializes the state
+		this.state = { 
+			pageTitle: "Customers", 
+			customersCount: 5,
+			customers: [
+				{ 
+					id: 1, 
+					name: "Scott", 
+					phone: "123-456", 
+					address: { city: "New Delhi"}, 
+					photo: "https://picsum.photos/id/1010/60"
+				},
+				{ 
+					id: 2, 
+					name: "Jones", 
+					phone: "234-567", 
+					address: { city: "New Jersey"},  
+					photo: "https://picsum.photos/id/1011/60"
+				},
+				{ 
+					id: 3, 
+					name: "Allen", 
+					phone: "345-678", 
+					address: { city: "London"},
+					photo: "https://picsum.photos/id/1012/60"
+				},
+				{ 
+					id: 4, 
+					name: "James", 
+					phone: null, 
+					address: { city: "Berlin"},
+					photo: "https://picsum.photos/id/1013/60"
+				},
+				{ 
+					id: 5, 
+					name: "John", 
+					phone: null, 
+					address: { city: "New York"},
+					photo: "https://picsum.photos/id/1014/60"
+				},
+			],
+		};
+	}
 
-	state = { 
-		pageTitle: "Customers", 
-		customersCount: 5,
-		customers: [
-			{ 
-				id: 1, 
-				name: "Scott", 
-				phone: "123-456", 
-				address: { city: "New Delhi"}, 
-				photo: "https://picsum.photos/id/1010/60"
-			},
-			{ 
-				id: 2, 
-				name: "Jones", 
-				phone: "234-567", 
-				address: { city: "New Jersey"},  
-				photo: "https://picsum.photos/id/1011/60"
-			},
-			{ 
-				id: 3, 
-				name: "Allen", 
-				phone: "345-678", 
-				address: { city: "London"},
-				photo: "https://picsum.photos/id/1012/60"
-			},
-			{ 
-				id: 4, 
-				name: "James", 
-				phone: null, 
-				address: { city: "Berlin"},
-				photo: "https://picsum.photos/id/1013/60"
-			},
-			{ 
-				id: 5, 
-				name: "John", 
-				phone: null, 
-				address: { city: "New York"},
-				photo: "https://picsum.photos/id/1014/60"
-			},
-		],
-	};
 
 	render() {
 		return <div>
