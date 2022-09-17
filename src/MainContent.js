@@ -44,12 +44,6 @@ class MainContent extends Component {
 		],
 	};
 
-	customerNameStyle = (custName) => {
-		if (custName.startsWith("S")) return "green-highlight border-left"
-		else if (custName.startsWith("J")) return "red-highlight border-right"
-		else return {};
-	};
-
 	render() {
 		return <div>
 			<h4 className="border-bottom m-1 p-1">
@@ -79,7 +73,7 @@ class MainContent extends Component {
 		this.setState({
 			customersCount: 7,
 		});
-	}
+	};
 
 	getPhoneToRender = (phone) => {
 		return phone?(
@@ -87,21 +81,35 @@ class MainContent extends Component {
 		):(
 			<div className="bg-warning p-2 text-center">No Phone</div>
 		)
-	}
+	};
 
 	getCustomerRow = () => {
 		return (this.state.customers.map((cust, index) => {
 			return (
 				<tr key={cust.id}>
 					<td>{cust.id} </td>
-					<td><img src={cust.photo} alt="Customer"/></td>
-					<td className={ this.customerNameStyle(cust.name) }>{cust.name}</td>
+					<td>
+						<img src={cust.photo} alt="Customer"/>
+						<div>
+							<button className="btn btn-sm btn-secondary" onClick={() => { this.onChangePicutreClick(cust, index); }}>Change Picture</button>
+						</div>
+					</td>
+					<td>{cust.name}</td>
 					<td>{this.getPhoneToRender(cust.phone)}</td>
 					<td>{cust.address.city}</td>
 				</tr>
 			)
 		}))
-	}
+	};
+
+	onChangePicutreClick = (cust, index) => {
+		// console.log(cust, index);
+
+		let custArr = this.state.customers;
+		custArr[index].photo = "https://picsum.photos/id/104/60";
+
+		this.setState({ customers: custArr });
+	};
 }
 
 export default MainContent;
