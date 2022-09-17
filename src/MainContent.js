@@ -10,28 +10,42 @@ class MainContent extends Component {
 				id: 1, 
 				name: "Scott", 
 				phone: "123-456", 
-				address: { city: "New Delhi"} },
+				address: { city: "New Delhi"}, 
+				photo: "https://picsum.photos/id/1010/60"
+			},
 			{ 
 				id: 2, 
 				name: "Jones", 
 				phone: "234-567", 
-				address: { city: "New Jersey"}  },
+				address: { city: "New Jersey"},  
+				photo: "https://picsum.photos/id/1011/60"
+			},
 			{ 
 				id: 3, 
 				name: "Allen", 
 				phone: "345-678", 
-				address: { city: "London"}  },
+				address: { city: "London"},
+				photo: "https://picsum.photos/id/1012/60"
+			},
 			{ 
 				id: 4, 
 				name: "James", 
 				phone: null, 
-				address: { city: "Berlin"}  },
+				address: { city: "Berlin"},
+				photo: "https://picsum.photos/id/1013/60"
+			},
 			{ 
 				id: 5, 
 				name: "John", 
 				phone: null, 
-				address: { city: "New York"}  },
+				address: { city: "New York"},
+				photo: "https://picsum.photos/id/1014/60"
+			},
 		],
+	};
+
+	customerNameStyle = (custName) => {
+		return { backgroundColor: (custName.startsWith('S'))?'green':'red' }
 	};
 
 	render() {
@@ -45,6 +59,7 @@ class MainContent extends Component {
 				<thead>	
 					<tr>
 						<th>#</th>
+						<th>Photo</th>
 						<th>Customer Name</th>
 						<th>Phone</th>
 						<th>City</th>
@@ -77,7 +92,8 @@ class MainContent extends Component {
 			return (
 				<tr key={cust.id}>
 					<td>{cust.id} </td>
-					<td>{cust.name}</td>
+					<td><img src={cust.photo} alt="Customer"/></td>
+					<td style={ this.customerNameStyle(cust.name) }>{cust.name}</td>
 					<td>{this.getPhoneToRender(cust.phone)}</td>
 					<td>{cust.address.city}</td>
 				</tr>
