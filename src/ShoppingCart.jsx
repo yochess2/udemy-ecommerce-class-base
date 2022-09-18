@@ -73,12 +73,12 @@ export default class ShoppingCart extends Component {
     let allProducts = [...this.state.products];
     let index = allProducts.indexOf(product);
 
-    allProducts = allProducts.map((p) => {
-      return { ...p };
-    });
+    // allProducts = allProducts.map((p) => {
+    //   return { ...p };
+    // });
 
     if (allProducts[index].quantity < maxValue) {
-      allProducts[index].quantity = 5;
+      allProducts[index].quantity++;
 
 
       //update the state of current component (parent component)

@@ -36,7 +36,7 @@ export default class Product extends Component {
 
           <div className="card-footer">
             <div className="float-left">
-              <span className="badge">{this.state.product.quantity}</span>
+              <span className="badge bg-dark">{this.state.product.quantity}</span>
 
               <div className="btn-group">
                 <button
