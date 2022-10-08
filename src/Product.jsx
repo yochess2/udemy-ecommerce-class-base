@@ -1,12 +1,22 @@
 import React, { Component } from "react";
 
 export default class Product extends Component {
-  state = {
-    product: this.props.product,
-  };
+  constructor(props) {
+    super(props)
+    this.state = {
+      product: this.props.product,
+    };
+   }
 
-  render() {
-    console.log(this.props);
+   componentDidCatch(error, info) {
+    console.log('compodidntWillCatch - product')
+    console.log(error, info)
+    localStorage.lastError = `${error}\n${JSON.stringify(info)}`;
+   }
+
+  render(props) {
+    console.log(this.props)
+    // console.log('product component', this.props, this.state);
 
     return (
       <div className="col-lg-6">
@@ -36,7 +46,7 @@ export default class Product extends Component {
 
           <div className="card-footer">
             <div className="float-left">
-              <span className="badge bg-dark">{this.state.product.quantity}</span>
+              <span className="badge bg-dark">{this.props.product.quantity}</span>
 
               <div className="btn-group">
                 <button

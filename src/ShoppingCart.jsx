@@ -4,7 +4,7 @@ import Product from "./Product";
 export default class ShoppingCart extends Component {
   //Executes when the component is mounted
   constructor(props) {
-    console.log("constructor - ShoppingCart");
+    // console.log("constructor - ShoppingCart");
     super(props); //calling super class's constructor
 
     //initialization of the state
@@ -20,8 +20,14 @@ export default class ShoppingCart extends Component {
     };
   }
 
+  componentDidCatch(error, info) {
+   console.log('compodidntWillCatch - shopping cart')
+   console.log(error, info)
+   localStorage.lastError = `${error}\n${JSON.stringify(info)}`;
+  }
+
   render() {
-    console.log("render - ShoppingCart");
+    // console.log("render - ShoppingCart");
 
     return (
       <div className="container-fluid">
@@ -50,21 +56,11 @@ export default class ShoppingCart extends Component {
   //Executes after constructor and render method (includes life cycle of child components, if any) of current component
   componentDidMount() {
     //fetch data from data source
-    console.log("componentDidMount - ShoppingCart");
+    // console.log("componentDidMount - ShoppingCart");
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(
-      "componentDidUpdate",
-      prevProps,
-      prevState,
-      this.props,
-      this.state
-    );
-
-    if (prevProps.x != this.props.x) {
-      //make http call
-    }
+    
   }
 
   //executes when the user clicks on + button.
@@ -73,17 +69,13 @@ export default class ShoppingCart extends Component {
     let allProducts = [...this.state.products];
     let index = allProducts.indexOf(product);
 
-    // allProducts = allProducts.map((p) => {
-    //   return { ...p };
-    // });
-
     if (allProducts[index].quantity < maxValue) {
-      allProducts[index].quantity++;
-
+      allProducts[index].quantity++
+    }
 
       //update the state of current component (parent component)
       this.setState({ products: allProducts });
-    }
+    
   };
 
   //executes when the user clicks on - button.
@@ -109,6 +101,7 @@ export default class ShoppingCart extends Component {
     if (window.confirm("Are you sure to delete?")) {
       //delete product based on index
       allProducts.splice(index, 1);
+      console.log(allProducts, this.state)
 
       //update the state of current component (parent component)
       this.setState({ products: allProducts });
