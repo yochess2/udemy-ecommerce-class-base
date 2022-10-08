@@ -38,7 +38,116 @@
     }
   ],
   "users": [
-    {"id":1,"email":"scott@test.com","password":"scott123"},
-    {"id":2,"email":"allen@test.com","password":"allen123"}
+    {
+      "id": 1,
+      "email": "scott@test.com",
+      "password": "scott123"
+    },
+    {
+      "id": 2,
+      "email": "allen@test.com",
+      "password": "allen123"
+    }
+  ],
+  "customers": [
+    {
+      "id": 2,
+      "name": "Jones",
+      "phone": "982-014",
+      "address": {
+        "city": "New Jersy"
+      },
+      "photo": "https://picsum.photos/id/1011/60"
+    },
+    {
+      "id": 3,
+      "name": "Allen",
+      "phone": "889-921",
+      "address": {
+        "city": "London"
+      },
+      "photo": "https://picsum.photos/id/1012/60"
+    },
+    {
+      "name": "James",
+      "address": {
+        "city": "Berlin"
+      },
+      "phone": "23423",
+      "photo": "https://picsum.photos/id/1013/60",
+      "id": 4
+    },
+    {
+      "id": 5,
+      "name": "John",
+      "phone": null,
+      "address": {
+        "city": "New York"
+      },
+      "photo": "https://picsum.photos/id/1014/60"
+    },
+    {
+      "name": "asf",
+      "address": {
+        "city": "asdf"
+      },
+      "phone": "asdf",
+      "photo": " https://picsum.photos/id/1011/60",
+      "id": 6
+    },
+    {
+      "name": "asdf",
+      "address": {
+        "city": "asdf"
+      },
+      "phone": "asdf",
+      "photo": "https://picsum.photos/id/1011/60",
+      "id": 7
+    },
+    {
+      "name": "asdf",
+      "address": {
+        "city": "asdf"
+      },
+      "phone": "sdf",
+      "photo": "https://picsum.photos/id/1011/60",
+      "id": 8
+    },
+    {
+      "name": "asdf",
+      "address": {
+        "city": "asdf"
+      },
+      "phone": "sdf",
+      "photo": "https://picsum.photos/id/1011/60",
+      "id": 9
+    },
+    {
+      "name": "asd",
+      "address": {
+        "city": "asdf"
+      },
+      "phone": "adsf",
+      "photo": "https://picsum.photos/id/1011/60",
+      "id": 10
+    },
+    {
+      "name": "asdf",
+      "address": {
+        "city": "adsf"
+      },
+      "phone": "adsf",
+      "photo": "https://picsum.photos/id/1011/60",
+      "id": 11
+    },
+    {
+      "name": "asdf",
+      "address": {
+        "city": "adsf"
+      },
+      "phone": "asdf",
+      "photo": "https://picsum.photos/id/1011/60",
+      "id": 12
+    }
   ]
 }

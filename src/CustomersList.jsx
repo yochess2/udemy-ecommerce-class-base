@@ -1,50 +1,31 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom"
 
 export default class CustomersList extends Component {
-  state = {
-    pageTitle: "Customers",
-    customersCount: 5,
-    customers: [
-      {
-        id: 1,
-        name: "Scott",
-        phone: "123-456",
-        address: { city: "New Delhi" },
-        photo: "https://picsum.photos/id/1010/60",
-      },
-      {
-        id: 2,
-        name: "Jones",
-        phone: "982-014",
-        address: { city: "New Jersy" },
-        photo: "https://picsum.photos/id/1011/60",
-      },
-      {
-        id: 3,
-        name: "Allen",
-        phone: "889-921",
-        address: { city: "London" },
-        photo: "https://picsum.photos/id/1012/60",
-      },
-      {
-        id: 4,
-        name: "James",
-        phone: null,
-        address: { city: "Berlin" },
-        photo: "https://picsum.photos/id/1013/60",
-      },
-      {
-        id: 5,
-        name: "John",
-        phone: null,
-        address: { city: "New York" },
-        photo: "https://picsum.photos/id/1014/60",
-      },
-    ],
-  };
+  constructor(props) {
+    super(props)
+    this.state = {
+      pageTitle: "Customers",
+      customersCount: 5,
+      customers: [],
+    };
+  }
 
-  componentDidMount() {
+  async componentDidMount() {
     document.title = "Customers - eCommerce"
+    let response = await fetch("http://localhost:8000/customers", {method:"GET"})
+
+    if (response.ok) {
+      let body = await response.json()
+      console.log('>>', body)
+      console.log(this.state)
+      this.setState({customers: body, customersCount: body.length})
+
+    } else {
+      console.log("error" + response.status)
+    }
+
+
   }
 
   render() {
@@ -53,13 +34,10 @@ export default class CustomersList extends Component {
         <h4 className="m-1 p-1">
           {this.state.pageTitle}
 
-          <span className="badge badge-secondary m-2">
+          <span className="badge text-bg-light badge-secondary m-2">
             {this.state.customersCount}
           </span>
-
-          <button className="btn btn-info" onClick={this.onRefreshClick}>
-            Refresh
-          </button>
+          <Link to="/new-customer" className="btn btn-primary">New Customer</Link>
         </h4>
 
         <table className="table">
@@ -70,6 +48,7 @@ export default class CustomersList extends Component {
               <th>Customer Name</th>
               <th>Phone</th>
               <th>City</th>
+              <th>Options</th>
             </tr>
           </thead>
           <tbody>{this.getCustomerRow()}</tbody>
@@ -78,11 +57,6 @@ export default class CustomersList extends Component {
     );
   }
 
-  //Executes when the user clicks on Refresh button
-  onRefreshClick = () => {
-    //Update the state using setState method - so that react updates the Browser DOM automatically
-    this.setState({ customersCount: 7 });
-  };
 
   getPhoneToRender = (phone) => {
     if (phone) return phone;
@@ -112,10 +86,26 @@ export default class CustomersList extends Component {
           <td>{cust.name}</td>
           <td>{this.getPhoneToRender(cust.phone)}</td>
           <td>{cust.address.city}</td>
+          <td>
+            <Link className="btn btn-info" to={`/edit-customer/${cust.id}`}>Edit</Link>
+            <button className="btn btn-danger" onClick={(e) => { this.onDeleteClick(cust.id) }}>Delete</button>
+          </td>
         </tr>
       );
     });
   };
+
+  onDeleteClick = async (id) => {
+    if (window.confirm("Are you sure you wanna delete this customer?")) {
+      let response = await fetch(`http://localhost:8000/customers/${id}`, {method: "DELETE"})
+
+      if (response.ok) {
+        let allCustomers = [...this.state.customers]
+        allCustomers = allCustomers.filter(cust => cust.id !== id)
+        this.setState({customers: allCustomers, customersCount: allCustomers.length})
+      }
+    }
+  }
 
   //Executes when the user clicks on "Change Picture" button in the grid
   //Receives the "customer" object and index of the currently clicked customer

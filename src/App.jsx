@@ -11,6 +11,8 @@ import CustomersList from "./CustomersList"
 import NoMatchPage from "./NoMatchPage"
 import Sidebar from "./Sidebar"
 import ProductById from "./ProductById"
+import NewCustomer from "./InsertCustomer"
+import UpdateCustomer from "./UpdateCustomer"
 
 import history from "./history"
 
@@ -52,6 +54,11 @@ export default class App extends Component {
                 <Route path="/customers" exact component={CustomersList} />
                 <Route path="/cart" exact component={ShoppingCart} />
                 <Route path="/product/:id" component={ProductById} />
+                <Route path="/new-customer" exact component={NewCustomer} />
+                <Route 
+                  exact 
+                  path="/edit-customer/:id" 
+                  component={UpdateCustomer} />
                 <Route path="*" component={NoMatchPage} />
               </Switch>
               
