@@ -1,4 +1,6 @@
 import React from 'react'
+import history from "./history"
+
 
 export class Login extends React.Component {
 	constructor(props) {
@@ -12,7 +14,8 @@ export class Login extends React.Component {
 	}
 
 	componentDidMount() {
-		console.log(this.state)
+		document.title = "Login - eCommerce"
+		console.log(this.state,this.props)
 	}
 
 	componentDidUpdate() {
@@ -21,9 +24,9 @@ export class Login extends React.Component {
 
 	render() {
 		return (
-
-			<div className="col-lg-9">
-				<h4 className="m-1 p-2 border-bottom">Login</h4>
+			<div className="row">
+			<div className="col-lg-6 mx-auto">
+				<h4 className="my-1 py-2 border-bottom">Login</h4>
 
 				{/* Email Starts */}
 				<div className="form-group form-row">
@@ -64,6 +67,7 @@ export class Login extends React.Component {
 				</div>
 				{this.state.message}
 			</div>
+			</div>
 		)
 	}
 
@@ -85,6 +89,8 @@ export class Login extends React.Component {
 			this.setState({
 				message: (<span className="text-success">"Successfully logged in"</span>)
 			})
+			this.props.updateIsLoggedInStatus(true)
+			history.replace("/dashboard")
 		} else {
 			//error
 			this.setState({

@@ -23,7 +23,7 @@ export default class ShoppingCart extends Component {
     // console.log("render - ShoppingCart");
 
     return (
-      <div className="container-fluid">
+      <div>
         <h4>Shopping Cart</h4>
 
         <div className="row">
@@ -50,7 +50,7 @@ export default class ShoppingCart extends Component {
   async componentDidMount(prevProps, prevState) {
     let response = await fetch("http://localhost:8000/products", { method:"GET"})
     let products = await response.json()
-
+    document.title = "Shopping Cart - eCommerce"
     this.setState({products: products})
   }
 

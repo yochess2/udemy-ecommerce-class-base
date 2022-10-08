@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom"
 
 export default class Product extends Component {
   constructor(props) {
@@ -7,6 +8,10 @@ export default class Product extends Component {
       product: this.props.product,
     };
    }
+
+    componentDidMount() {
+      document.title = "Product - eCommerce"
+    }
 
    componentDidCatch(error, info) {
     console.log('compodidntWillCatch - product')
@@ -45,8 +50,9 @@ export default class Product extends Component {
           {/* card body ends here */}
 
           <div className="card-footer">
-            <div className="float-left">
-              <span className="badge bg-dark">{this.props.product.quantity}</span>
+            
+            <div className="float-start">
+              <span className="badge text-bg-light">{this.state.product.quantity}</span>
 
               <div className="btn-group">
                 <button
@@ -70,9 +76,12 @@ export default class Product extends Component {
             </div>
             {/* float-left ends here */}
 
-            <div className="float-right">{this.props.children}</div>
-          </div>
+            <div className="float-end">
+              <Link to={`product/${this.state.product.id}`}>Details</Link>
+              {this.props.children}
+            </div>
           {/* card-footer ends here */}
+          </div>
         </div>
       </div>
     );

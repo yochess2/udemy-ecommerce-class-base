@@ -43,6 +43,10 @@ export default class CustomersList extends Component {
     ],
   };
 
+  componentDidMount() {
+    document.title = "Customers - eCommerce"
+  }
+
   render() {
     return (
       <div>
