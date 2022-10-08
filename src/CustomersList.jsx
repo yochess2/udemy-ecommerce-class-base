@@ -8,23 +8,31 @@ export default class CustomersList extends Component {
       pageTitle: "Customers",
       customersCount: 5,
       customers: [],
+
+      currentPage: 0,
     };
+    this.customersPerPage =  5
+
+    this.totalPageCount = Math.floor( this.state.customersCount / this.customersPerPage )
+    this.startIndex = this.state.currentPage * this.state.customersPerPage
   }
 
   async componentDidMount() {
     document.title = "Customers - eCommerce"
+
+    // fetch data on mount
     let response = await fetch("http://localhost:8000/customers", {method:"GET"})
+    if (!response.ok) return console.log('some error' + response.status)
+    let body = await response.json()
 
-    if (response.ok) {
-      let body = await response.json()
-      console.log('>>', body)
-      console.log(this.state)
-      this.setState({customers: body, customersCount: body.length})
 
-    } else {
-      console.log("error" + response.status)
-    }
-
+    this.setState({
+      customers: body, 
+      customersCount: body.length,
+    }, () => {
+      this.totalPageCount = Math.floor( this.state.customersCount / this.customersPerPage )
+      this.startIndex = this.state.currentPage * this.state.customersPerPage
+    })
 
   }
 
@@ -53,10 +61,48 @@ export default class CustomersList extends Component {
           </thead>
           <tbody>{this.getCustomerRow()}</tbody>
         </table>
+
+        <div className="pageBar">
+              <button className="btn btn-primary" onClick={this.onPrevPage.bind(this)}>
+                Prev
+              </button>
+              <button className="btn btn-primary" onClick={this.onNextPage.bind(this)}>
+                Next
+              </button>
+
+        </div>
       </div>
     );
   }
 
+  onNextPage() {
+    if (this.state.currentPage < this.totalPageCount) {
+      this.setState(prevState => {
+        return {
+          ...prevState, 
+          currentPage: prevState.currentPage+1 
+        }
+      })
+    }
+  }
+
+  onPrevPage() {
+    if (this.state.currentPage > 0) {
+      this.setState(prevState => {
+        return {
+          ...prevState, 
+          currentPage: prevState.currentPage-1
+        }
+      })
+    }
+  }
+
+  getCustomersGroup() {
+    let currentIndex = this.state.currentPage * this.customersPerPage
+    let endIndex = currentIndex + this.customersPerPage
+
+    return this.state.customers.slice(currentIndex, endIndex)
+  }
 
   getPhoneToRender = (phone) => {
     if (phone) return phone;
@@ -66,7 +112,7 @@ export default class CustomersList extends Component {
   };
 
   getCustomerRow = () => {
-    return this.state.customers.map((cust, index) => {
+    return this.getCustomersGroup().map((cust, index) => {
       return (
         <tr key={cust.id}>
           <td>{cust.id}</td>
@@ -110,13 +156,9 @@ export default class CustomersList extends Component {
   //Executes when the user clicks on "Change Picture" button in the grid
   //Receives the "customer" object and index of the currently clicked customer
   onChangePictureClick = (cust, index) => {
-    //console.log(cust);
-    //console.log(index);
-
     //get existing customers
     var custArr = this.state.customers;
     custArr[index].photo = "https://picsum.photos/id/104/60";
-
     //update "customers" array in the state
     this.setState({ customers: custArr });
   };
