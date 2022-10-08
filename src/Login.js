@@ -5,8 +5,8 @@ export class Login extends React.Component {
 		super(props)
 
 		this.state = {
-			email: "email@aol.com",
-			password: "abc123",
+			email: "scott@test.com",
+			password: "scott123",
 			message: "",
 		}
 	}
@@ -62,14 +62,25 @@ export class Login extends React.Component {
 						Login
 					</button>
 				</div>
-
+				{this.state.message}
 			</div>
 		)
 	}
 
-	onLoginClick = () => {
+	onLoginClick = async () => {
 		console.log(this.state)
-		if (this.state.email === "admin@test.com" && this.state.password === "admin123") {
+		
+		let response = await fetch(
+			`http://localhost:8000/users?email=${
+				this.state.email
+			}&password=${
+				this.state.password
+			}`, {
+				Method:"GET"
+			}
+		)
+		let body = await response.json()
+		if (body.length > 0) {
 			//success
 			this.setState({
 				message: (<span className="text-success">"Successfully logged in"</span>)
