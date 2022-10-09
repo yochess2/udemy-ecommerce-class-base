@@ -47,6 +47,16 @@
       "id": 2,
       "email": "allen@test.com",
       "password": "allen123"
+    },
+    {
+      "email": "scott@gmail.com",
+      "password": "Abc123",
+      "fullname": "scott",
+      "dateOfBirth": "0001-09-09",
+      "gender": "male",
+      "country": "USA",
+      "receiveNewLetters": false,
+      "id": 3
     }
   ],
   "customers": [

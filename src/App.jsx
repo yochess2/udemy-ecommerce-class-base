@@ -14,6 +14,8 @@ import ProductById from "./ProductById"
 import NewCustomer from "./InsertCustomer"
 import UpdateCustomer from "./UpdateCustomer"
 
+import Register from "./Register"
+
 import history from "./history"
 
 export default class App extends Component {
@@ -59,6 +61,8 @@ export default class App extends Component {
                   exact 
                   path="/edit-customer/:id" 
                   component={UpdateCustomer} />
+                <Route path="/register" exact component={Register} />
+
                 <Route path="*" component={NoMatchPage} />
               </Switch>
               

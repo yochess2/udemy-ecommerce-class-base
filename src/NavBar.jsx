@@ -4,7 +4,6 @@ import history from "./history"
 
 class NavBar extends Component {
   render() {
-  console.log('hi')
     return (
       <React.Fragment>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark navbar-style">
@@ -35,6 +34,19 @@ class NavBar extends Component {
                   activeclassname="active"
                 >
                   Login
+                </NavLink>
+              </li>
+              :
+              ""
+              }
+              {!this.props.isLoggedIn ? 
+              <li className="nav-item">
+                <NavLink exact
+                  className="nav-link" 
+                  to="/register"
+                  activeclassname="active"
+                >
+                  Register
                 </NavLink>
               </li>
               :
